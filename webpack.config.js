@@ -60,15 +60,17 @@ module.exports = {
                 }),
             },
             {
+                test: /\.scss$/,
+                loaders: ExtractTextPlugin.extract({
+                  use: ['css-loader', 'sass-loader']
+                }),
+            },
+            {
                 test:/\.(png|jpg|gif)$/,
                 use: [
                     'file-loader',
                 ],
             },
-            // {
-            //     test:/\.json$/,
-            //     loader: 'json-loader'
-            // },
         ],
     },
 

@@ -1,11 +1,16 @@
+//node modules
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { clearInterval } from 'timers';
 
+//components
 import Menu from './components/Menu';
 import TeaView from './components/TeaView';
 
+//json
 import TeasJson from '../assets/teas.json';
+
+//styles
+import '../scss/global.scss';
 
 class App extends React.Component{
     constructor(props){
