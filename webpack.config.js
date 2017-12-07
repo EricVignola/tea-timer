@@ -7,6 +7,8 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+// const json = require('./file.json');
+
 //constant with our paths
 //note, this paths object is vanilla javascript and does not
 //have to do with webpack or node. The only part that uses node
@@ -63,6 +65,10 @@ module.exports = {
                     'file-loader',
                 ],
             },
+            // {
+            //     test:/\.json$/,
+            //     loader: 'json-loader'
+            // },
         ],
     },
 
