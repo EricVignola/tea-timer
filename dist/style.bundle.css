@@ -5001,5 +5001,30 @@ a.thumbnail {
   .large-flex-dir-column-reverse {
     flex-direction: column-reverse; } }
 
-body {
-  color: red; }
+.off-right {
+  animation-name: moveFromRightToLeft;
+  animation-duration: 4s; }
+
+.move-to-left {
+  animation-name: move-to-left;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards; }
+
+.move-to-right {
+  animation-name: move-to-right;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards; }
+
+@keyframes move-to-left {
+  from {
+    transform: translateX(150%); }
+  to {
+    transform: translateX(0%); } }
+
+@keyframes move-to-right {
+  from {
+    transform: translateX(-150%); }
+  to {
+    transform: translateX(0%); } }

@@ -9,9 +9,9 @@ class Footer extends React.Component{
     render(){
         return (
             <div>
-                <ul>
-                    <li>Gong Fu</li>
-                    <li>Western</li>
+                <ul className="menu">
+                    <li><a className="button" onClick={this.props.setAsGongFu}>Gong Fu</a></li>
+                    <li><a className="button" onClick={this.props.setAsWestern}>Western</a></li>
                 </ul>
             </div>
         );

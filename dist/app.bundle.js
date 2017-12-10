@@ -1025,7 +1025,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 //json
 
 
-//styles
+//styles 
 
 
 var App = function (_React$Component) {
@@ -1038,9 +1038,14 @@ var App = function (_React$Component) {
 
         _this.state = {
             teas: [],
-            component: ''
+            component: '',
+            teasIsLoaded: false,
+            menuIsActive: true,
+            teaViewIsActive: false
         };
 
+        _this.setMenuAsActive = _this.setMenuAsActive.bind(_this);
+        _this.setTeaViewAsActive = _this.setTeaViewAsActive.bind(_this);
         _this.selectComponent = _this.selectComponent.bind(_this);
         _this.fetchTeas = _this.fetchTeas.bind(_this);
         return _this;
@@ -1053,6 +1058,7 @@ var App = function (_React$Component) {
         key: 'componentDidMount',
         value: function componentDidMount() {
             this.fetchTeas();
+            // $(document).foundation();
         }
 
         //runs when the component is removed from the DOM
@@ -1061,24 +1067,51 @@ var App = function (_React$Component) {
         key: 'componentWillUnmount',
         value: function componentWillUnmount() {}
     }, {
+        key: 'componentWillMount',
+        value: function componentWillMount() {}
+    }, {
+        key: 'setMenuAsActive',
+        value: function setMenuAsActive() {
+            this.setState({
+                menuIsActive: true,
+                teaViewIsActive: false
+            });
+        }
+    }, {
+        key: 'setTeaViewAsActive',
+        value: function setTeaViewAsActive() {
+            this.setState({
+                menuIsActive: false,
+                teaViewIsActive: true
+            });
+        }
+    }, {
         key: 'selectComponent',
         value: function selectComponent(event) {
-            event.preventDefault();
             var nameOfMenuOptionSelected = event.target.name;
             var toRender = null;
 
             switch (nameOfMenuOptionSelected) {
 
                 case this.state.teas[0].type:
-                    toRender = _react2.default.createElement(_TeaView2.default, { teas: this.state.teas[0] });
+                    toRender = _react2.default.createElement(_TeaView2.default, { teas: this.state.teas[0],
+                        setTeaViewAsActive: this.setTeaViewAsActive,
+                        setMenuAsActive: this.setMenuAsActive,
+                        teaViewIsActive: this.state.teaViewIsActive });
                     break; //have to have break here or the switch statement will always default to final case
 
                 case this.state.teas[1].type:
-                    toRender = _react2.default.createElement(_TeaView2.default, { teas: this.state.teas[1] });
+                    toRender = _react2.default.createElement(_TeaView2.default, { teas: this.state.teas[1],
+                        setTeaViewAsActive: this.setTeaViewAsActive,
+                        setMenuAsActive: this.setMenuAsActive,
+                        teaViewIsActive: this.state.teaViewIsActive });
                     break;
 
                 case this.state.teas[2].type:
-                    toRender = _react2.default.createElement(_TeaView2.default, { teas: this.state.teas[2] });
+                    toRender = _react2.default.createElement(_TeaView2.default, { teas: this.state.teas[2],
+                        setTeaViewAsActive: this.setTeaViewAsActive,
+                        setMenuAsActive: this.setMenuAsActive,
+                        teaViewIsActive: this.state.teaViewIsActive });
                     break;
 
             }
@@ -1088,6 +1121,14 @@ var App = function (_React$Component) {
     }, {
         key: 'fetchTeas',
         value: function fetchTeas() {
+            //because our json file is local and static we can import it using
+            //webpack...if for any reason we have to use an API to fetch data 
+            //from a non local source use the below XMLHttpRequest
+            this.setState({
+                teasIsLoaded: true,
+                teas: _teas2.default.teas
+            });
+
             //**************************************************
             //START OF XMLHTTPREQUEST...to be used for API calls
             //**************************************************
@@ -1124,39 +1165,35 @@ var App = function (_React$Component) {
             //**************************************************
             //END OF XMLHTTPREQUEST...to be used for API calls
             //**************************************************
-
-            //because our json file is local and static we can import it using
-            //webpack...if for any reason we have to use an API to fetch data 
-            //from a non local source use the above XMLHttpRequest
-            this.setState({
-                isLoaded: true,
-                teas: _teas2.default.teas
-            });
         }
     }, {
         key: 'render',
         value: function render() {
-            var isLoaded = this.state.isLoaded;
+            var _state = this.state,
+                teasIsLoaded = _state.teasIsLoaded,
+                menuIsActive = _state.menuIsActive,
+                teaViewIsActive = _state.teaViewIsActive;
 
-            if (!isLoaded) {
+            if (!teasIsLoaded) {
                 return _react2.default.createElement(
                     'div',
                     null,
                     'Loading...'
                 );
             } else {
-                return _react2.default.createElement(
-                    'div',
-                    null,
-                    _react2.default.createElement(
-                        'h1',
+                if (menuIsActive) {
+                    return _react2.default.createElement(_Menu2.default, { teas: this.state.teas,
+                        getMenuChoice: this.selectComponent,
+                        setMenuAsActive: this.setMenuAsActive,
+                        setTeaViewAsActive: this.setTeaViewAsActive,
+                        menuIsActive: this.state.menuIsActive });
+                } else {
+                    return _react2.default.createElement(
+                        'div',
                         null,
-                        'All that react goodness'
-                    ),
-                    _react2.default.createElement(_Menu2.default, { teas: this.state.teas,
-                        getMenuChoice: this.selectComponent }),
-                    this.state.component
-                );
+                        this.state.component
+                    );
+                }
             }
         }
     }]);
@@ -18478,6 +18515,7 @@ var Menu = function (_React$Component) {
         value: function render() {
             var _this2 = this;
 
+            var className = "grid-container";
             var teaListItems = this.props.teas.map(function (tea) {
                 return _react2.default.createElement(_TeaListItem2.default, { key: tea.type,
                     tea: tea,
@@ -18485,11 +18523,15 @@ var Menu = function (_React$Component) {
             });
             return _react2.default.createElement(
                 'div',
-                null,
+                { className: className, onClick: this.props.setTeaViewAsActive },
                 _react2.default.createElement(
-                    'ul',
-                    null,
-                    teaListItems
+                    'div',
+                    { className: 'grid-x' },
+                    _react2.default.createElement(
+                        'ul',
+                        { className: 'small-12 cell vertical menu' },
+                        teaListItems
+                    )
                 )
             );
         }
@@ -18542,12 +18584,18 @@ var TeaListItem = function (_React$Component) {
         key: "render",
         value: function render() {
             return _react2.default.createElement(
-                "li",
+                "div",
                 null,
                 _react2.default.createElement(
-                    "a",
-                    { name: this.props.tea.type, onClick: this.props.getMenuChoice },
-                    this.props.tea.type
+                    "li",
+                    null,
+                    _react2.default.createElement(
+                        "a",
+                        { name: this.props.tea.type,
+                            onClick: this.props.getMenuChoice,
+                            className: "button hollow large" },
+                        this.props.tea.type
+                    )
                 )
             );
         }
@@ -18601,27 +18649,98 @@ var TeaView = function (_React$Component) {
 
         _this.state = {
             isGongFu: true,
-            isWestern: false,
-            title: "",
-            timeToSteep: null
-
+            isWestern: false
         };
+
+        _this.setAsGongFu = _this.setAsGongFu.bind(_this);
+        _this.setAsWestern = _this.setAsWestern.bind(_this);
+
         return _this;
     }
 
     _createClass(TeaView, [{
+        key: 'setAsGongFu',
+        value: function setAsGongFu() {
+            this.setState({
+                isGongFu: true,
+                isWestern: false
+            });
+        }
+    }, {
+        key: 'setAsWestern',
+        value: function setAsWestern() {
+            this.setState({
+                isGongFu: false,
+                isWestern: true
+            });
+        }
+    }, {
         key: 'render',
         value: function render() {
-            return _react2.default.createElement(
-                'div',
-                null,
-                _react2.default.createElement(
-                    'h1',
-                    null,
-                    this.props.teas.type
-                ),
-                _react2.default.createElement(_Footer2.default, null)
-            );
+            var className = "grid-container";
+            if (this.state.isGongFu) {
+                return _react2.default.createElement(
+                    'div',
+                    { className: 'x-grid' },
+                    _react2.default.createElement(
+                        'button',
+                        { className: 'button large expanded', onClick: this.props.setMenuAsActive },
+                        'Back To Tea Menu'
+                    ),
+                    _react2.default.createElement(
+                        'h1',
+                        null,
+                        this.props.teas.type
+                    ),
+                    _react2.default.createElement(
+                        'ul',
+                        null,
+                        _react2.default.createElement(
+                            'li',
+                            null,
+                            "Initial Brew (Gong Fu): " + this.props.teas.gongFuInfo.firstInfusion
+                        ),
+                        _react2.default.createElement(
+                            'li',
+                            null,
+                            "Subsequent Brew (Gong Fu): " + this.props.teas.gongFuInfo.subsequentInfusion
+                        )
+                    ),
+                    _react2.default.createElement(_Footer2.default, { setAsGongFu: this.setAsGongFu,
+                        setAsWestern: this.setAsWestern })
+                );
+            } else {
+                return _react2.default.createElement(
+                    'div',
+                    { className: 'x-grid' },
+                    _react2.default.createElement(
+                        'button',
+                        { className: 'button large expanded', onClick: this.props.setMenuAsActive },
+                        'Back To Tea Menu'
+                    ),
+                    _react2.default.createElement(
+                        'h1',
+                        null,
+                        this.props.teas.type
+                    ),
+                    _react2.default.createElement(
+                        'ul',
+                        null,
+                        _react2.default.createElement(
+                            'li',
+                            null,
+                            "Initial Brew (Western): " + this.props.teas.westernInfo.firstInfusion
+                        ),
+                        _react2.default.createElement(
+                            'li',
+                            null,
+                            "Subsequent Brew (Western): " + this.props.teas.westernInfo.subsequentInfusion
+                        )
+                    ),
+                    _react2.default.createElement(_Footer2.default, { setAsGongFu: this.setAsGongFu,
+                        setAsWestern: this.setAsWestern })
+                );
+            }
         }
     }]);
 
@@ -18676,16 +18795,24 @@ var Footer = function (_React$Component) {
                 null,
                 _react2.default.createElement(
                     'ul',
-                    null,
+                    { className: 'menu' },
                     _react2.default.createElement(
                         'li',
                         null,
-                        'Gong Fu'
+                        _react2.default.createElement(
+                            'a',
+                            { className: 'button', onClick: this.props.setAsGongFu },
+                            'Gong Fu'
+                        )
                     ),
                     _react2.default.createElement(
                         'li',
                         null,
-                        'Western'
+                        _react2.default.createElement(
+                            'a',
+                            { className: 'button', onClick: this.props.setAsWestern },
+                            'Western'
+                        )
                     )
                 )
             );

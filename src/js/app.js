@@ -9,7 +9,7 @@ import TeaView from './components/TeaView';
 //json
 import TeasJson from '../assets/teas.json';
 
-//styles
+//styles 
 import '../scss/global.scss';
 
 class App extends React.Component{
@@ -18,9 +18,14 @@ class App extends React.Component{
 
         this.state = {
             teas: [],
-            component: ''
+            component: '',
+            teasIsLoaded: false,
+            menuIsActive: true,
+            teaViewIsActive: false
         }
         
+        this.setMenuAsActive = this.setMenuAsActive.bind(this);
+        this.setTeaViewAsActive = this.setTeaViewAsActive.bind(this);
         this.selectComponent = this.selectComponent.bind(this);
         this.fetchTeas = this.fetchTeas.bind(this);
     }
@@ -28,6 +33,7 @@ class App extends React.Component{
     //runs after component rendered to the DOM
     componentDidMount(){
         this.fetchTeas();
+        // $(document).foundation();
     }
 
     //runs when the component is removed from the DOM
@@ -35,23 +41,49 @@ class App extends React.Component{
 
     }
 
+    componentWillMount(){
+    }
+
+
+    setMenuAsActive(){
+        this.setState({
+            menuIsActive: true,
+            teaViewIsActive: false
+        });
+    }
+
+    setTeaViewAsActive(){
+        this.setState({
+            menuIsActive: false,
+            teaViewIsActive: true
+        });
+    }
+
     selectComponent(event){
-        event.preventDefault();
         let nameOfMenuOptionSelected = event.target.name;
         let toRender = null;
 
         switch(nameOfMenuOptionSelected){
             
             case this.state.teas[0].type:
-            toRender = <TeaView teas = {this.state.teas[0]}/>
+            toRender = <TeaView teas = {this.state.teas[0]}
+                                setTeaViewAsActive = {this.setTeaViewAsActive}
+                                setMenuAsActive = {this.setMenuAsActive}
+                                teaViewIsActive = {this.state.teaViewIsActive}/>
             break; //have to have break here or the switch statement will always default to final case
 
             case this.state.teas[1].type:
-            toRender = <TeaView teas = {this.state.teas[1]}/>
+            toRender = <TeaView teas = {this.state.teas[1]}
+                                setTeaViewAsActive = {this.setTeaViewAsActive}
+                                setMenuAsActive = {this.setMenuAsActive}
+                                teaViewIsActive = {this.state.teaViewIsActive}/>
             break;
 
             case this.state.teas[2].type:
-            toRender = <TeaView teas = {this.state.teas[2]}/>
+            toRender = <TeaView teas = {this.state.teas[2]}
+                                setTeaViewAsActive = {this.setTeaViewAsActive}
+                                setMenuAsActive = {this.setMenuAsActive}
+                                teaViewIsActive = {this.state.teaViewIsActive}/>
             break; 
 
         }
@@ -60,6 +92,14 @@ class App extends React.Component{
     }
 
     fetchTeas(){
+        //because our json file is local and static we can import it using
+        //webpack...if for any reason we have to use an API to fetch data 
+        //from a non local source use the below XMLHttpRequest
+        this.setState({
+            teasIsLoaded: true, 
+            teas: TeasJson.teas
+        });
+
         //**************************************************
         //START OF XMLHTTPREQUEST...to be used for API calls
         //**************************************************
@@ -96,29 +136,28 @@ class App extends React.Component{
         //**************************************************
         //END OF XMLHTTPREQUEST...to be used for API calls
         //**************************************************
-
-        //because our json file is local and static we can import it using
-        //webpack...if for any reason we have to use an API to fetch data 
-        //from a non local source use the above XMLHttpRequest
-        this.setState({
-            isLoaded: true, 
-            teas: TeasJson.teas
-        });
     }
 
     render(){
-        let { isLoaded } = this.state;
-        if(!isLoaded){
+        let { teasIsLoaded, menuIsActive, teaViewIsActive } = this.state;
+        if(!teasIsLoaded){
             return <div>Loading...</div>
         } else {
-            return(
-                <div>
-                    <h1>All that react goodness</h1>
+            if(menuIsActive){
+                return (
                     <Menu teas = {this.state.teas}
-                        getMenuChoice = {this.selectComponent}/>
-                    {this.state.component}
-                </div>
-            );
+                    getMenuChoice = {this.selectComponent}
+                    setMenuAsActive = {this.setMenuAsActive}
+                    setTeaViewAsActive = {this.setTeaViewAsActive}
+                    menuIsActive = {this.state.menuIsActive}/>
+                );
+            } else {
+                return(
+                    <div>
+                        {this.state.component}
+                    </div>
+                );
+            }
         }
     }
 }
