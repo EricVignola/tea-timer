@@ -10,24 +10,6 @@
 
 }
 
-// @keyframes moveFromRightToLeft {
-//     from {
-//         tranform: translateX(200%)
-//     }
-//     to {
-//         transform: translateX(0%)
-//     }
-// }
-
-// .grid-container{
-//     max-width: 700px;
-// }
-
-// .button {
-//     text-align: left;
-// }
-
-
 //TODO: create css page transition when the user clicks on the menu and move
 //to tea view
 .move-to-left {
@@ -44,15 +26,28 @@
     animation-fill-mode: forwards;
 }
 
-// @keyframes moveToLeft{
-//     from{
-//         transform: translateX(0%);
-//     }
-
-//     to{
-//         transform: translateX(-200%);
-//     }
-// }
+.fade-enter {
+    opacity: 0.01;
+  }
+  
+  .fade-enter.fade-enter-active {
+    opacity: 1;
+    transition: opacity 1000ms ease-in;
+  }
+  
+  .fade-exit {
+    opacity: 1;
+  }
+  
+  .fade-exit.fade-exit-active {
+    opacity: 0.01;
+    transition: opacity 800ms ease-in;
+  }
+  
+  .example-leave.example-leave-active {
+    opacity: 0.01;
+    transition: opacity 300ms ease-in;
+  }
 
 @keyframes move-to-left {
     from { transform: translateX(150%)}

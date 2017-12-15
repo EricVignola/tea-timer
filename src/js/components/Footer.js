@@ -8,7 +8,7 @@ class Footer extends React.Component{
 
     render(){
         return (
-            <div>
+            <div style={this.props.style}>
                 <ul className="menu">
                     <li><a className="button" onClick={this.props.setAsGongFu}>Gong Fu</a></li>
                     <li><a className="button" onClick={this.props.setAsWestern}>Western</a></li>

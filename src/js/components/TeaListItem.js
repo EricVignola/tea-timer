@@ -8,15 +8,14 @@ class TeaListItem extends React.Component{
 
     render(){
         return(
-            <div>
-                <li>
-                    <a name= {this.props.tea.type} 
-                    onClick={this.props.getMenuChoice}
-                    className="button hollow large">
-                        {this.props.tea.type}
-                    </a>
-                </li>
-            </div>
+            <li>
+                <a name= {this.props.tea.type} 
+                onClick={this.props.getMenuChoice}
+                className="button hollow large"
+                style={this.props.style}>
+                    {this.props.tea.type}
+                </a>
+            </li>
         );
     }
 }

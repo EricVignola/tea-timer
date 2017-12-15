@@ -2,6 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Footer from './Footer';
+import TeaStats from './TeaStats';
+import BackButton from './BackButton';
+import TeaViewTitle from './TeaViewTitle';
 
 class TeaView extends React.Component{
     constructor(props){
@@ -32,34 +35,48 @@ class TeaView extends React.Component{
     }
 
     render(){
-        let className = "grid-container";
-        if(this.state.isGongFu){
-            return (
-                <div className="x-grid">
-                    <button className="button large expanded" onClick={this.props.setMenuAsActive}>Back To Tea Menu</button>
-                    <h1>{this.props.teas.type}</h1>
-                    <ul>
-                        <li>{"Initial Brew (Gong Fu): " + this.props.teas.gongFuInfo.firstInfusion}</li>
-                        <li >{"Subsequent Brew (Gong Fu): " + this.props.teas.gongFuInfo.subsequentInfusion}</li>
-                    </ul>
-                    <Footer setAsGongFu = {this.setAsGongFu}
-                            setAsWestern = {this.setAsWestern}/>
-                </div>
-            );
-        } else {
-            return (
-                <div className="x-grid">
-                    <button className="button large expanded" onClick={this.props.setMenuAsActive}>Back To Tea Menu</button>
-                    <h1>{this.props.teas.type}</h1>
-                    <ul>
-                        <li>{"Initial Brew (Western): " + this.props.teas.westernInfo.firstInfusion}</li>
-                        <li>{"Subsequent Brew (Western): " + this.props.teas.westernInfo.subsequentInfusion}</li>
-                    </ul>
-                    <Footer setAsGongFu = {this.setAsGongFu}
-                        setAsWestern = {this.setAsWestern}/>
-                </div>
-            );
+        let teaIndexNumber = null;
+        switch(this.props.chosenTea){
+            case this.props.teas[0].type:
+            teaIndexNumber = 0;
+            break;
+
+            case this.props.teas[1].type:
+            teaIndexNumber = 1;
+            break;
+
+            case this.props.teas[2].type:
+            teaIndexNumber = 2;
         }
+        // if(this.props.doMount){
+        if(this.props.chosenTea){
+            if(this.state.isGongFu){
+                return (
+                    <div className="x-grid">
+                        <BackButton toggle = {this.props.toggle} style={this.props.style}/>
+                        <TeaViewTitle teas={this.props.teas[teaIndexNumber]} style={this.props.style}/>
+                        <TeaStats teas={this.props.teas[teaIndexNumber]} style={this.props.style}/>
+                        <Footer setAsGongFu = {this.setAsGongFu}
+                                setAsWestern = {this.setAsWestern} style={this.props.style}/>
+                    </div>
+                );
+            } else {
+                return (
+                    <div className="x-grid">
+                        <BackButton toggle = {this.props.toggle} style={this.props.style}/>
+                        <TeaViewTitle teas={this.props.teas[teaIndexNumber]} style={this.props.style}/>
+                        <TeaStats teas={this.props.teas[teaIndexNumber]} style={this.props.style}/>
+                        <Footer setAsGongFu = {this.setAsGongFu}
+                            setAsWestern = {this.setAsWestern} style={this.props.style}/>
+                    </div>
+                );
+            }
+        } else {
+            return null;
+        }
+        // } else {
+        //     return null;
+        // }
     }
 }
 

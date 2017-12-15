@@ -8,26 +8,30 @@ class Menu extends React.Component{
         super(props);    
     }
 
-    componentDidMount(){
-        
-    }
-
     render(){
-        let className = "grid-container";
         const teaListItems = this.props.teas.map((tea) => 
             <TeaListItem key={tea.type}
                 tea = {tea} 
-                getMenuChoice = {this.props.getMenuChoice}/>
+                getMenuChoice = {this.props.getMenuChoice}
+                style={this.props.style}/>
         );
-        return (
-            <div className={className} onClick={this.props.setTeaViewAsActive}>
-                <div className="grid-x">
+        
+        // if(this.props.doMount){
+            return (
+                <div style={{position: "absolute", width: "100%"}} onClick={this.props.toggle}>
                     <ul className="small-12 cell vertical menu">
                         {teaListItems}
                     </ul>
                 </div>
-            </div>
-        );
+                // <div className="" onClick={this.props.setTeaViewAsActive}>
+                //     <ul className="">
+                //         {teaListItems}
+                //     </ul>
+                // </div>
+            );
+        // } else {
+        //     return null;
+        // }
     }
 }
 
