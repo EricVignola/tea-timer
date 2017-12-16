@@ -19005,6 +19005,31 @@ var TeaView = function (_React$Component) {
 
                 case this.props.teas[2].type:
                     teaIndexNumber = 2;
+                    break;
+
+                case this.props.teas[3].type:
+                    teaIndexNumber = 3;
+                    break;
+
+                case this.props.teas[4].type:
+                    teaIndexNumber = 4;
+                    break;
+
+                case this.props.teas[5].type:
+                    teaIndexNumber = 5;
+                    break;
+
+                case this.props.teas[6].type:
+                    teaIndexNumber = 6;
+                    break;
+
+                case this.props.teas[7].type:
+                    teaIndexNumber = 7;
+                    break;
+
+                case this.props.teas[8].type:
+                    teaIndexNumber = 8;
+                    break;
             }
             // if(this.props.doMount){
             if (this.props.chosenTea) {
@@ -21291,7 +21316,7 @@ module.exports = exports['default'];
 /* 53 */
 /***/ (function(module, exports) {
 
-module.exports = {"teas":[{"type":"White Tea","gongFuInfo":{"firstInfusion":20,"subsequentInfusion":10,"averageNumInfusions":5},"westernInfo":{"firstInfusion":180,"subsequentInfusion":60,"averageNumInfusions":2}},{"type":"Green Tea","gongFuInfo":{"firstInfusion":15,"subsequentInfusion":3,"averageNumInfusions":5},"westernInfo":{"firstInfusion":120,"subsequentInfusion":60,"averageNumInfusions":2}},{"type":"Oolong (ball)","gongFuInfo":{"firstInfusion":25,"subsequentInfusion":5,"averageNumInfusions":9},"westernInfo":{"firstInfusion":120,"subsequentInfusion":30,"averageNumInfusions":5}}]}
+module.exports = {"teas":[{"type":"White Tea","gongFuInfo":{"firstInfusion":20,"subsequentInfusion":10,"averageNumInfusions":5},"westernInfo":{"firstInfusion":180,"subsequentInfusion":60,"averageNumInfusions":2}},{"type":"Green Tea","gongFuInfo":{"firstInfusion":15,"subsequentInfusion":3,"averageNumInfusions":5},"westernInfo":{"firstInfusion":120,"subsequentInfusion":60,"averageNumInfusions":2}},{"type":"Yellow","gongFuInfo":{"firstInfusion":15,"subsequentInfusion":5,"averageNumInfusions":5},"westernInfo":{"firstInfusion":120,"subsequentInfusion":60,"averageNumInfusions":2}},{"type":"Oolong (strip)","gongFuInfo":{"firstInfusion":20,"subsequentInfusion":5,"averageNumInfusions":9},"westernInfo":{"firstInfusion":120,"subsequentInfusion":30,"averageNumInfusions":4}},{"type":"Oolong (ball)","gongFuInfo":{"firstInfusion":25,"subsequentInfusion":5,"averageNumInfusions":9},"westernInfo":{"firstInfusion":120,"subsequentInfusion":30,"averageNumInfusions":5}},{"type":"Black (small leaf)","gongFuInfo":{"firstInfusion":10,"subsequentInfusion":5,"averageNumInfusions":8},"westernInfo":{"firstInfusion":120,"subsequentInfusion":60,"averageNumInfusions":4}},{"type":"Black (large leaf)","gongFuInfo":{"firstInfusion":15,"subsequentInfusion":5,"averageNumInfusions":8},"westernInfo":{"firstInfusion":120,"subsequentInfusion":60,"averageNumInfusions":4}},{"type":"PuErh (raw)","gongFuInfo":{"firstInfusion":10,"subsequentInfusion":3,"averageNumInfusions":15},"westernInfo":{"firstInfusion":120,"subsequentInfusion":30,"averageNumInfusions":6}},{"type":"PuErh (ripe)","gongFuInfo":{"firstInfusion":10,"subsequentInfusion":5,"averageNumInfusions":20},"westernInfo":{"firstInfusion":120,"subsequentInfusion":30,"averageNumInfusions":6}}]}
 
 /***/ }),
 /* 54 */

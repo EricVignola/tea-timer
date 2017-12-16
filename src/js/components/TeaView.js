@@ -47,6 +47,31 @@ class TeaView extends React.Component{
 
             case this.props.teas[2].type:
             teaIndexNumber = 2;
+            break;
+
+            case this.props.teas[3].type:
+            teaIndexNumber = 3;
+            break;
+
+            case this.props.teas[4].type:
+            teaIndexNumber = 4;
+            break;
+
+            case this.props.teas[5].type:
+            teaIndexNumber = 5;
+            break;
+
+            case this.props.teas[6].type:
+            teaIndexNumber = 6;
+            break;
+
+            case this.props.teas[7].type:
+            teaIndexNumber = 7;
+            break;
+
+            case this.props.teas[8].type:
+            teaIndexNumber = 8;
+            break;
         }
         // if(this.props.doMount){
         if(this.props.chosenTea){

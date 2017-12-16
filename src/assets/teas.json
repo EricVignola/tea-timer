@@ -31,6 +31,36 @@
                 }
         },
         {
+            "type": "Yellow",
+            "gongFuInfo":
+                {
+                    "firstInfusion": 15,
+                    "subsequentInfusion": 5,
+                    "averageNumInfusions": 5
+                },
+            "westernInfo": 
+                {
+                    "firstInfusion": 120,
+                    "subsequentInfusion": 60,
+                    "averageNumInfusions": 2
+                }
+        },
+        {
+            "type": "Oolong (strip)",
+            "gongFuInfo":
+                {
+                    "firstInfusion": 20,
+                    "subsequentInfusion": 5,
+                    "averageNumInfusions": 9
+                },
+            "westernInfo": 
+                {
+                    "firstInfusion": 120,
+                    "subsequentInfusion": 30,
+                    "averageNumInfusions": 4
+                }
+        },
+        {
             "type": "Oolong (ball)",
             "gongFuInfo":
                 {
@@ -43,6 +73,66 @@
                     "firstInfusion": 120,
                     "subsequentInfusion": 30,
                     "averageNumInfusions": 5
+                }
+        },
+        {
+            "type": "Black (small leaf)",
+            "gongFuInfo":
+                {
+                    "firstInfusion": 10,
+                    "subsequentInfusion": 5,
+                    "averageNumInfusions": 8
+                },
+            "westernInfo": 
+                {
+                    "firstInfusion": 120,
+                    "subsequentInfusion": 60,
+                    "averageNumInfusions": 4
+                }
+        },
+        {
+            "type": "Black (large leaf)",
+            "gongFuInfo":
+                {
+                    "firstInfusion": 15,
+                    "subsequentInfusion": 5,
+                    "averageNumInfusions": 8
+                },
+            "westernInfo": 
+                {
+                    "firstInfusion": 120,
+                    "subsequentInfusion": 60,
+                    "averageNumInfusions": 4
+                }
+        },
+        {
+            "type": "PuErh (raw)",
+            "gongFuInfo":
+                {
+                    "firstInfusion": 10,
+                    "subsequentInfusion": 3,
+                    "averageNumInfusions": 15
+                },
+            "westernInfo": 
+                {
+                    "firstInfusion": 120,
+                    "subsequentInfusion": 30,
+                    "averageNumInfusions": 6
+                }
+        },
+        {
+            "type": "PuErh (ripe)",
+            "gongFuInfo":
+                {
+                    "firstInfusion": 10,
+                    "subsequentInfusion": 5,
+                    "averageNumInfusions": 20
+                },
+            "westernInfo": 
+                {
+                    "firstInfusion": 120,
+                    "subsequentInfusion": 30,
+                    "averageNumInfusions": 6
                 }
         }
     ]
