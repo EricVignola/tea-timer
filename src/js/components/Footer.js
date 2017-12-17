@@ -7,11 +7,16 @@ class Footer extends React.Component{
     }
 
     render(){
+        let buttonText = "";
+        if(this.props.showGongFu){
+            buttonText = "Show Western";
+        } else {
+            buttonText = "Show Gong Fu";
+        }
         return (
             <div style={this.props.style}>
                 <ul className="menu">
-                    <li><a className="button" onClick={this.props.setAsGongFu}>Gong Fu</a></li>
-                    <li><a className="button" onClick={this.props.setAsWestern}>Western</a></li>
+                    <li><a className="button" onClick={this.props.toggleBrewStyle}>{buttonText}</a></li>
                 </ul>
             </div>
         );

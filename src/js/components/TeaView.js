@@ -11,26 +11,18 @@ class TeaView extends React.Component{
         super(props);
 
         this.state = {
-            isGongFu: true,
-            isWestern: false
+            showGongFu: true,
+            showWestern: false
         };
 
-        this.setAsGongFu = this.setAsGongFu.bind(this);
-        this.setAsWestern = this.setAsWestern.bind(this);
+        this.toggleBrewStyle = this.toggleBrewStyle.bind(this);
 
     }
 
-    setAsGongFu(){
+    toggleBrewStyle(){
         this.setState({
-            isGongFu: true,
-            isWestern: false
-        });
-    }
-
-    setAsWestern(){
-        this.setState({
-            isGongFu: false,
-            isWestern: true
+            showGongFu: !this.state.showGongFu,
+            showWestern: !this.state.showWestern
         });
     }
 
@@ -73,35 +65,20 @@ class TeaView extends React.Component{
             teaIndexNumber = 8;
             break;
         }
-        // if(this.props.doMount){
         if(this.props.chosenTea){
-            if(this.state.isGongFu){
-                return (
-                    <div className="x-grid">
-                        <BackButton toggle = {this.props.toggle} style={this.props.style}/>
-                        <TeaViewTitle teas={this.props.teas[teaIndexNumber]} style={this.props.style}/>
-                        <TeaStats teas={this.props.teas[teaIndexNumber]} style={this.props.style}/>
-                        <Footer setAsGongFu = {this.setAsGongFu}
-                                setAsWestern = {this.setAsWestern} style={this.props.style}/>
-                    </div>
-                );
-            } else {
-                return (
-                    <div className="x-grid">
-                        <BackButton toggle = {this.props.toggle} style={this.props.style}/>
-                        <TeaViewTitle teas={this.props.teas[teaIndexNumber]} style={this.props.style}/>
-                        <TeaStats teas={this.props.teas[teaIndexNumber]} style={this.props.style}/>
-                        <Footer setAsGongFu = {this.setAsGongFu}
-                            setAsWestern = {this.setAsWestern} style={this.props.style}/>
-                    </div>
-                );
-            }
+            return (
+                <div className="x-grid">
+                    <BackButton toggle = {this.props.toggle} style={this.props.style}/>
+                    <TeaViewTitle teas={this.props.teas[teaIndexNumber]} style={this.props.style}/>
+                    <TeaStats showGongFu = {this.state.showGongFu} teas={this.props.teas[teaIndexNumber]} style={this.props.style}/>
+                    <Footer toggleBrewStyle = {this.toggleBrewStyle}
+                            showGongFu = {this.state.showGongFu}
+                            style={this.props.style}/>
+                </div>
+            );
         } else {
             return null;
         }
-        // } else {
-        //     return null;
-        // }
     }
 }
 
