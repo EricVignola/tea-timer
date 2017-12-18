@@ -18822,7 +18822,6 @@ var Menu = function (_React$Component) {
                     style: _this2.props.style });
             });
 
-            // if(this.props.doMount){
             return _react2.default.createElement(
                 'div',
                 { style: { position: "absolute", width: "100%" }, onClick: this.props.toggle },
@@ -18831,16 +18830,7 @@ var Menu = function (_React$Component) {
                     { className: 'small-12 cell vertical menu' },
                     teaListItems
                 )
-            )
-            // <div className="" onClick={this.props.setTeaViewAsActive}>
-            //     <ul className="">
-            //         {teaListItems}
-            //     </ul>
-            // </div>
-            ;
-            // } else {
-            //     return null;
-            // }
+            );
         }
     }]);
 
@@ -18964,30 +18954,21 @@ var TeaView = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (TeaView.__proto__ || Object.getPrototypeOf(TeaView)).call(this, props));
 
         _this.state = {
-            isGongFu: true,
-            isWestern: false
+            showGongFu: true,
+            showWestern: false
         };
 
-        _this.setAsGongFu = _this.setAsGongFu.bind(_this);
-        _this.setAsWestern = _this.setAsWestern.bind(_this);
+        _this.toggleBrewStyle = _this.toggleBrewStyle.bind(_this);
 
         return _this;
     }
 
     _createClass(TeaView, [{
-        key: 'setAsGongFu',
-        value: function setAsGongFu() {
+        key: 'toggleBrewStyle',
+        value: function toggleBrewStyle() {
             this.setState({
-                isGongFu: true,
-                isWestern: false
-            });
-        }
-    }, {
-        key: 'setAsWestern',
-        value: function setAsWestern() {
-            this.setState({
-                isGongFu: false,
-                isWestern: true
+                showGongFu: !this.state.showGongFu,
+                showWestern: !this.state.showWestern
             });
         }
     }, {
@@ -19031,35 +19012,20 @@ var TeaView = function (_React$Component) {
                     teaIndexNumber = 8;
                     break;
             }
-            // if(this.props.doMount){
             if (this.props.chosenTea) {
-                if (this.state.isGongFu) {
-                    return _react2.default.createElement(
-                        'div',
-                        { className: 'x-grid' },
-                        _react2.default.createElement(_BackButton2.default, { toggle: this.props.toggle, style: this.props.style }),
-                        _react2.default.createElement(_TeaViewTitle2.default, { teas: this.props.teas[teaIndexNumber], style: this.props.style }),
-                        _react2.default.createElement(_TeaStats2.default, { teas: this.props.teas[teaIndexNumber], style: this.props.style }),
-                        _react2.default.createElement(_Footer2.default, { setAsGongFu: this.setAsGongFu,
-                            setAsWestern: this.setAsWestern, style: this.props.style })
-                    );
-                } else {
-                    return _react2.default.createElement(
-                        'div',
-                        { className: 'x-grid' },
-                        _react2.default.createElement(_BackButton2.default, { toggle: this.props.toggle, style: this.props.style }),
-                        _react2.default.createElement(_TeaViewTitle2.default, { teas: this.props.teas[teaIndexNumber], style: this.props.style }),
-                        _react2.default.createElement(_TeaStats2.default, { teas: this.props.teas[teaIndexNumber], style: this.props.style }),
-                        _react2.default.createElement(_Footer2.default, { setAsGongFu: this.setAsGongFu,
-                            setAsWestern: this.setAsWestern, style: this.props.style })
-                    );
-                }
+                return _react2.default.createElement(
+                    'div',
+                    { className: 'x-grid' },
+                    _react2.default.createElement(_BackButton2.default, { toggle: this.props.toggle, style: this.props.style }),
+                    _react2.default.createElement(_TeaViewTitle2.default, { teas: this.props.teas[teaIndexNumber], style: this.props.style }),
+                    _react2.default.createElement(_TeaStats2.default, { showGongFu: this.state.showGongFu, teas: this.props.teas[teaIndexNumber], style: this.props.style }),
+                    _react2.default.createElement(_Footer2.default, { toggleBrewStyle: this.toggleBrewStyle,
+                        showGongFu: this.state.showGongFu,
+                        style: this.props.style })
+                );
             } else {
                 return null;
             }
-            // } else {
-            //     return null;
-            // }
         }
     }]);
 
@@ -19109,6 +19075,12 @@ var Footer = function (_React$Component) {
     _createClass(Footer, [{
         key: 'render',
         value: function render() {
+            var buttonText = "";
+            if (this.props.showGongFu) {
+                buttonText = "Show Western";
+            } else {
+                buttonText = "Show Gong Fu";
+            }
             return _react2.default.createElement(
                 'div',
                 { style: this.props.style },
@@ -19120,17 +19092,8 @@ var Footer = function (_React$Component) {
                         null,
                         _react2.default.createElement(
                             'a',
-                            { className: 'button', onClick: this.props.setAsGongFu },
-                            'Gong Fu'
-                        )
-                    ),
-                    _react2.default.createElement(
-                        'li',
-                        null,
-                        _react2.default.createElement(
-                            'a',
-                            { className: 'button', onClick: this.props.setAsWestern },
-                            'Western'
+                            { className: 'button', onClick: this.props.toggleBrewStyle },
+                            buttonText
                         )
                     )
                 )
@@ -19184,30 +19147,46 @@ var TeaStats = function (_React$Component) {
     _createClass(TeaStats, [{
         key: 'render',
         value: function render() {
-            return _react2.default.createElement(
-                'ul',
-                { style: this.props.style },
-                _react2.default.createElement(
-                    'li',
-                    { style: { listStyleType: "none" } },
-                    "Initial Brew (Gong Fu): " + this.props.teas.gongFuInfo.firstInfusion
-                ),
-                _react2.default.createElement(
-                    'li',
-                    { style: { listStyleType: "none" } },
-                    "Subsequent Brew (Gong Fu): " + this.props.teas.gongFuInfo.subsequentInfusion
-                ),
-                _react2.default.createElement(
-                    'li',
-                    { style: { listStyleType: "none" } },
-                    "Initial Brew (Western): " + this.props.teas.westernInfo.firstInfusion
-                ),
-                _react2.default.createElement(
-                    'li',
-                    { style: { listStyleType: "none" } },
-                    "Subsequent Brew (Western): " + this.props.teas.westernInfo.subsequentInfusion
-                )
-            );
+            console.log(this.props.showGongFu);
+            if (this.props.showGongFu) {
+                return _react2.default.createElement(
+                    'div',
+                    null,
+                    _react2.default.createElement(
+                        'ul',
+                        { style: this.props.style },
+                        _react2.default.createElement(
+                            'li',
+                            { style: { listStyleType: "none" } },
+                            "Initial Brew (Gong Fu): " + this.props.teas.gongFuInfo.firstInfusion
+                        ),
+                        _react2.default.createElement(
+                            'li',
+                            { style: { listStyleType: "none" } },
+                            "Subsequent Brew (Gong Fu): " + this.props.teas.gongFuInfo.subsequentInfusion
+                        )
+                    )
+                );
+            } else {
+                return _react2.default.createElement(
+                    'div',
+                    null,
+                    _react2.default.createElement(
+                        'ul',
+                        { style: this.props.style },
+                        _react2.default.createElement(
+                            'li',
+                            { style: { listStyleType: "none" } },
+                            "Initial Brew (Western): " + this.props.teas.westernInfo.firstInfusion
+                        ),
+                        _react2.default.createElement(
+                            'li',
+                            { style: { listStyleType: "none" } },
+                            "Subsequent Brew (Western): " + this.props.teas.westernInfo.subsequentInfusion
+                        )
+                    )
+                );
+            }
         }
     }]);
 
